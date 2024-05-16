@@ -38,6 +38,11 @@ public class UserController {
                 .map(user -> {
                     user.setName(newUser.getName());
                     user.setDescription(newUser.getDescription());
+                    user.setBlock1(newUser.getBlock1());
+                    user.setBlock2(newUser.getBlock2());
+                    user.setBlock3(newUser.getBlock3());
+                    user.setBlock4(newUser.getBlock4());
+                    user.setImg(newUser.getImg());
                     return repository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException((long) id));
