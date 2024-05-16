@@ -1,0 +1,16 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  margin-top: 50px;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav{
+  display: flex;
+  gap: 30px;
+}

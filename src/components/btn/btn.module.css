@@ -1,0 +1,13 @@
+.btn{
+  padding: 20px;
+  border: 3px solid #A2FDFA;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn p {
+  color: #FFFFFF;
+  font-size: 28px;
+  
+}
