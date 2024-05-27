@@ -1,10 +1,15 @@
 import classes from "./input.module.css";
 
-const Input = ({ title }) => {
+const Input = ({ title, value, inputChange }) => {
+
+  function changeInput(e){
+    inputChange(e.target.value)
+  }
+
   return (
     <div class={classes.wrap}>
       <p>{title}</p>
-      <input class={classes.input} />
+      <input onChange={changeInput} class={classes.input} value={value} />
     </div>
   );
 };

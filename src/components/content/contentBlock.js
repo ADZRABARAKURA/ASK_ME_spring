@@ -3,13 +3,18 @@ import axios from 'axios';
 import Btn from "../btn/btn";
 import Input from "../input/input";
 import classes from "./contentBlock.module.css";
+import { Buffer } from 'buffer';
 
 const ContentBlock = ({ userId }) => {
   const [userData, setUserData] = useState(null);
+  const [senderName, setSenderName] = useState(null);
+  const [senderMessage, setSenderMessage] = useState(null);
+  const [senderTotal, setSenderTotal] = useState(null);
+
 
   useEffect(() => {
     // Отправить запрос на ваш бэкенд для получения данных о пользователе с указанным ID
-    axios.get(`http://localhost:8080/users/${userId}`)
+    axios.get(`http://localhost:8080/api/users/${1}`)
         .then(response => {
           setUserData(response.data);
         })
@@ -18,7 +23,34 @@ const ContentBlock = ({ userId }) => {
         });
   }, [userId]);
 
-  return (
+  function setSenderMessageWrapper(e){
+    setSenderMessage(e.target.value)
+  }
+
+  function sendDonation(){
+
+    const donation = {
+      message: senderMessage,
+      total: senderTotal,
+      senderName: senderName
+    };
+
+    axios.post('http://localhost:8080/api/donations/1', donation)
+    .then(response => {
+      if (response.data && response.data.redirectUrl) {
+          // Если в ответе есть поле redirectUrl, делаем редирект
+          window.location.href = response.data.redirectUrl;
+      } else {
+          console.error('Redirect URL not found in response');
+      }
+  })
+  .catch(error => {
+      console.error('Error sending donation: ', error);
+  });
+  }
+
+  if(userData!=null){
+    return (
       <div class={classes.wrapper}>
         <div class={classes.container}>
           <div class={classes.upBlock}>
@@ -33,31 +65,36 @@ const ContentBlock = ({ userId }) => {
             )}
           </div>
           <div class={classes.middleBlock}>
-            <div class={classes.cell}></div>
+            <div class={classes.cell}>
+              {userData.name}
+              {userData.description}
+              <img style={{ maxWidth: '80px', maxHeight: '80px' }} src={userData.img}></img>
+            </div>
             <div class={classes.cell}></div>
           </div>
           <div class={classes.downBlock}>
             <div class={classes.controller}>
               <p class={classes.title}>Поддержать стримера</p>
               <div class={classes.inputs}>
-                <Input title="Ваше имя" />
-                <Input title="Валюта" />
+                <Input title="Ваше имя" inputChange={setSenderName}/>
+                <Input title="Валюта" value="RUB"/>
               </div>
               <div>
-                <Input title="Сумма пожертвования" />
+                <Input title="Сумма пожертвования" inputChange={setSenderTotal}/>
               </div>
             </div>
             <div class={classes.blockMsg}>
               <p class={classes.title}>Сообщение стримеру</p>
               <div class={classes.msg}>
-                <textarea row="4"></textarea>
+                <textarea onChange={setSenderMessageWrapper} row="4"></textarea>
               </div>
-              <button>Поддержать</button>
+              <button onClick={sendDonation}>Поддержать</button>
             </div>
           </div>
         </div>
       </div>
   );
+}
 };
 
 export default ContentBlock;

@@ -10,8 +10,8 @@ const Header = () => {
           <img src={logo} />
         </div>
         <div class={classes.nav}>
-          <Btn title="Поиск авторов" />
-          <Btn title="Войти" />
+          {/* <Btn title="Поиск авторов" />
+          <Btn title="Войти" /> */}
         </div>
       </div>
     </div>
