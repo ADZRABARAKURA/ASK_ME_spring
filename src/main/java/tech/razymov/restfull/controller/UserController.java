@@ -8,6 +8,7 @@ import tech.razymov.restfull.repository.UserRepository;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserRepository repository;
@@ -16,24 +17,24 @@ public class UserController {
         this.repository = repository;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> all() {
         return repository.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public User newUser(@RequestBody User newUser) {
         return repository.save(newUser);
     }
 
-    @GetMapping("/users/{id}")
-    public User one(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public User one(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException((long) id));
     }
 
-    @PutMapping("/users/{id}")
-    public User replaceUser(@RequestBody User newUser, @PathVariable int id) {
+    @PutMapping("/{id}")
+    public User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
         return repository.findById( id)
                 .map(user -> {
                     user.setName(newUser.getName());
@@ -48,8 +49,8 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException((long) id));
     }
 
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }
