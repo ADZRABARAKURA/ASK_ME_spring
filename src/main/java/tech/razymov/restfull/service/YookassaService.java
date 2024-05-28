@@ -1,21 +1,26 @@
 package tech.razymov.restfull.service;
 
 import feign.FeignException;
-import feign.Response;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.razymov.restfull.service.requests.PaymentRequest;
 import tech.razymov.restfull.service.response.PaymentResponse;
 
-import java.security.SecureRandom;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import static tech.razymov.restfull.util.KeyGenerator.generateIdempotenceKey;
+
 @Service
 @RequiredArgsConstructor
 public class YookassaService {
     private final YookassaClient yookassaClient;
+    @Value("${payments.shopId}")
+    private Long shopId;
+
+    @Value("${payments.secretKey}")
+    private String secretKey;
     @FunctionalInterface
     interface SendRequestFunctionalInterface <T>{
         T execute();
@@ -37,18 +42,8 @@ public class YookassaService {
         return result;
     }
 
-    private String generateIdempotenceKey(int length) {
-        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        SecureRandom RANDOM = new SecureRandom();
-        StringBuilder key = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            key.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
-        }
-        return key.toString();
-    }
-
     public PaymentResponse createPayment(PaymentRequest paymentRequest){
-        String auth = 388229 + ":" + "test_FD8BkPl6DBHCaHLbwK86RlQYAKcMislMSYIjV48g9Vo"; //TODO
+        String auth = shopId + ":" + secretKey; //TODO
         String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
         String authorizationHeader = "Basic " + encodedAuth;
         return responseHandler(()->yookassaClient.createPayment(paymentRequest, authorizationHeader, generateIdempotenceKey(32)));

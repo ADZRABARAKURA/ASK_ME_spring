@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class PaymentRequest {
     @Setter
     public static class Confirmation{
         private String type = "redirect";
-        private String return_url = "http://localhost:3000";
+        private String return_url = "https://askme-donation.ru";
     }
 
     private Amount amount;

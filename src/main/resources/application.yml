@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: Ask_ME_owner
+    url: jdbc:postgresql://ep-young-butterfly-a2urt27b.eu-central-1.aws.neon.tech:5432/ask_me_database
+    password: uFjUyKH3Vf4Y
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+
+payments:
+  shopId: ${SHOP_ID:388229}
+  secretKey: ${SECRET_KEY:test_FD8BkPl6DBHCaHLbwK86RlQYAKcMislMSYIjV48g9Vo}
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+application:
+  rootUrl: https://askme-donation.ru

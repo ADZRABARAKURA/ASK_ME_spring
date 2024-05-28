@@ -27,6 +27,7 @@ public class User {
     private String block3;
     private String block4;
     private String img;
+    private String uniqUrl;
 
     public User() {}
     @Override

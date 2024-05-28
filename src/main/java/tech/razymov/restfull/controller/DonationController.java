@@ -4,16 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tech.razymov.restfull.dto.DonationDto;
 import tech.razymov.restfull.dto.PaymentUrlDto;
-import tech.razymov.restfull.entity.Donation;
-import tech.razymov.restfull.service.DontationService;
+import tech.razymov.restfull.service.DonationService;
 
 @RestController
 @RequestMapping("/api/donations")
 @RequiredArgsConstructor
 public class DonationController {
-    private final DontationService dontationService;
+    private final DonationService donationService;
     @PostMapping("/{id}")
     public PaymentUrlDto sendDonation(@PathVariable Long id, @RequestBody DonationDto donationDto){
-        return dontationService.sendDonation(id, donationDto);
+        return donationService.sendDonation(id, donationDto);
     }
 }

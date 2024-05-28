@@ -7,9 +7,11 @@ import tech.razymov.restfull.repository.UserRepository;
 
 import java.util.List;
 
+import static tech.razymov.restfull.util.KeyGenerator.generateIdempotenceKey;
+
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController { //По-хорошему, нужно вынести логику в сервис, а не делать её на уровне домена
 
     private final UserRepository repository;
 
@@ -24,6 +26,8 @@ public class UserController {
 
     @PostMapping
     public User newUser(@RequestBody User newUser) {
+        newUser.setUniqUrl(generateIdempotenceKey(32));
+        newUser.setId(null);
         return repository.save(newUser);
     }
 
@@ -44,6 +48,7 @@ public class UserController {
                     user.setBlock3(newUser.getBlock3());
                     user.setBlock4(newUser.getBlock4());
                     user.setImg(newUser.getImg());
+                    user.setUniqUrl(generateIdempotenceKey(32));
                     return repository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException((long) id));
