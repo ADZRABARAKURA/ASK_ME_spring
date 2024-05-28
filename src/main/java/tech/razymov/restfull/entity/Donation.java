@@ -31,7 +31,7 @@ public class Donation {
 
 
     public DonationDto toDto(){
-        return new DonationDto(this.message, this.total, this.senderName);
+        return new DonationDto(this.id, this.message, this.total, this.senderName);
     }
     @Override
     public final boolean equals(Object o) {

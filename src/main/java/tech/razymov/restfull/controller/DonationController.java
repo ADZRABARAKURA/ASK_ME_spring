@@ -15,4 +15,9 @@ public class DonationController {
     public PaymentUrlDto sendDonation(@PathVariable Long id, @RequestBody DonationDto donationDto){
         return donationService.sendDonation(id, donationDto);
     }
+
+    @PostMapping("/queue/{uniq_id}")
+    public DonationDto deleteAndGet(@PathVariable String uniq_id){
+        return donationService.deleteAndGet(uniq_id);
+    }
 }

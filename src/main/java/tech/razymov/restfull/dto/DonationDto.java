@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DonationDto {
+    private Long id;
     private String message;
     private Long total;
     private String senderName;
