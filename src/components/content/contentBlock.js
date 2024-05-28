@@ -4,6 +4,7 @@ import Btn from "../btn/btn";
 import Input from "../input/input";
 import classes from "./contentBlock.module.css";
 import { Buffer } from 'buffer';
+import UserProfile from './userprofile';
 
 const ContentBlock = ({ userId }) => {
   const [userData, setUserData] = useState(null);
@@ -14,7 +15,7 @@ const ContentBlock = ({ userId }) => {
 
   useEffect(() => {
     // Отправить запрос на ваш бэкенд для получения данных о пользователе с указанным ID
-    axios.get(`http://localhost:8080/api/users/${1}`)
+    axios.get(`https://askme-donation.ru/backend/api/users/${1}`)
         .then(response => {
           setUserData(response.data);
         })
@@ -35,7 +36,7 @@ const ContentBlock = ({ userId }) => {
       senderName: senderName
     };
 
-    axios.post('http://localhost:8080/api/donations/1', donation)
+    axios.post('https://askme-donation.ru/backend/api/donations/1', donation)
     .then(response => {
       if (response.data && response.data.redirectUrl) {
           // Если в ответе есть поле redirectUrl, делаем редирект
@@ -66,11 +67,11 @@ const ContentBlock = ({ userId }) => {
           </div>
           <div class={classes.middleBlock}>
             <div class={classes.cell}>
-              {userData.name}
-              {userData.description}
-              <img style={{ maxWidth: '80px', maxHeight: '80px' }} src={userData.img}></img>
+             <UserProfile userData={userData}/>
             </div>
-            <div class={classes.cell}></div>
+            <div class={classes.imgCell}>
+              <div className={classes.backgroundImage}></div>
+            </div>
           </div>
           <div class={classes.downBlock}>
             <div class={classes.controller}>
@@ -79,9 +80,8 @@ const ContentBlock = ({ userId }) => {
                 <Input title="Ваше имя" inputChange={setSenderName}/>
                 <Input title="Валюта" value="RUB"/>
               </div>
-              <div>
-                <Input title="Сумма пожертвования" inputChange={setSenderTotal}/>
-              </div>
+              <Input down={true} title="Сумма пожертвования" inputChange={setSenderTotal}/>
+             
             </div>
             <div class={classes.blockMsg}>
               <p class={classes.title}>Сообщение стримеру</p>

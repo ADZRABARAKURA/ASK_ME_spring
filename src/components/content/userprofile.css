@@ -1,0 +1,41 @@
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    min-height: 90%;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: white; /* Белый цвет текста для всего компонента */
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-text {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 3em;
+    
+}
+
+.user-description {
+    color: #e6e6e6;
+    font-size: 2em;
+}
+
+.user-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}

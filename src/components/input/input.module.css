@@ -2,6 +2,21 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   padding: 10px;
+  width: 50%;
+  height: 80%;
+}
+
+.downWrap{
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.downWrap p {
+  color: #FFFFFF;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .wrap p {
