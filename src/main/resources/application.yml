@@ -7,7 +7,7 @@ spring:
   jpa:
     database: postgresql
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
 
 payments:
   shopId: ${SHOP_ID:388229}
@@ -17,3 +17,9 @@ logging:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 application:
   rootUrl: https://askme-donation.ru
+springdoc:
+  swagger-ui:
+    url: /backend/v3/api-docs
+
+security:
+  rememberMeKey: somekey
