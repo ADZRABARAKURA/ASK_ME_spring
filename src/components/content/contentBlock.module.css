@@ -147,6 +147,13 @@
   transition: 0.3s linear;
 }
 
+.contact {
+  color:white;
+  text-align: right;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
 .supSubmit:hover {
   color: rgb(124, 121, 215);
   background-color: white;

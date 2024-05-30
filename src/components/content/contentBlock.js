@@ -72,6 +72,7 @@ const ContentBlock = ({ userId }) => {
               </div>
               </div>
         </div>
+        <p class={classes.contact}>Связаться с нами: askme-donation@yandex.ru</p>
       </div>
   );
 }
