@@ -59,6 +59,7 @@ const ContentBlock = ({ userId }) => {
 
   if(userData!=null){
     return (
+    
       <div class={classes.wrapper}>
         <div class={classes.container}>
           <div class={classes.upBlock}>
@@ -73,6 +74,9 @@ const ContentBlock = ({ userId }) => {
               </div>
         </div>
         <p class={classes.contact}>Связаться с нами: askme-donation@yandex.ru</p>
+        <p class={classes.contact}>Данные самозанятого:</p>
+        <p class={classes.contact}>ФИО: Усов Алексей Андреевич</p>
+        <p class={classes.contact}>ИНН: 662304382536</p>
       </div>
   );
 }
