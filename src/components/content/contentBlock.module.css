@@ -1,12 +1,13 @@
 .wrapper{ 
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container{
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
   gap: 45px;
   width: 95%;
 }
@@ -15,33 +16,20 @@
   background-color: rgba(39, 33, 143, 0.2);
   border-radius: 15px;
   padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  row-gap: 20px;
-  column-gap: 40px;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
-
-.backgroundImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('Twitch-Banner-Size-1.jpg'); /* Укажите путь к вашему изображению */
-  background-size: cover;
-  background-position: center;
-}
 
 .item{
-  height: 100px;
+  height: 100%;
+  text-align: center;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   font-family: Arial, sans-serif;
   font-size: 3em;
   color: white;
-  margin-bottom: 10px;
   display: flex;
   justify-content: center; /* Выравнивание по горизонтали */
   align-items: center; /* Выравнивание по вертикали */
@@ -70,19 +58,20 @@
 .downBlock{
   background-color: rgba(39, 33, 143, 0.2);
   display: flex;
-  gap: 40px;
+  flex-direction: column;
   justify-content: space-around;
   padding: 15px;
   border-radius: 15px;
   font-size: 1em;
-  margin-bottom: 40px;
+  gap: 15px;
 }
 
 .controller {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 40%;
+  width: 50%;
+  flex-wrap: wrap;
 }
 
 .title{
@@ -93,7 +82,7 @@
 
 .inputs {
   display: flex;
-  flex-direction: row; /* Размещаем элементы в столбец */
+  flex-direction: column; /* Размещаем элементы в столбец */
   justify-content: space-around;
   gap: 10px; /* Отступ между элементами */
 }
@@ -102,7 +91,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 55%;
+  flex-grow: 1;
 }
 
 .blockMsg .title{
@@ -113,6 +102,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   padding: 15px;
+  height: 100%;
 }
 
 .msg textarea{
@@ -121,7 +111,7 @@
   resize: none;
   font-size: 18px;
   color: #FFFFFF;
-  
+  height: 100%;
   width: 100%;
 }
 
@@ -134,6 +124,74 @@
   font-size: 24px;
   padding: 7px;
   cursor: pointer;
+}
+
+.contact {
+  color:white;
+  text-align: right;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.supSubmit {
+  width: 20%;
+  font-size: 25px;
+  color: white;
+  background: transparent;
+  border-color: white;
+  border-radius: 50px;
+  border-width: 3px;
+  border-style: solid;
+  padding: 0.5%;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+.supSubmit:hover {
+  color: rgb(124, 121, 215);
+  background-color: white;
+  transition: 0.3s linear;
+}
+
+.supInfoWrap {
+  display: flex;
+  gap: 15px;
+}
+
+.supTitle {
+  color:white;
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+
+.supWrap {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 1% 2%;
+  gap: 10px;
+}
+
+.supControls {
+  display: flex;
+  gap: 15px;
+}
+
+.supInput {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #FFFFFF;
+  padding: 0.5% 0 0.5% 0;
+  min-width: 10px;
+}
+
+.supInput:active,
+:hover,
+:focus {
+  outline: 0;
+  outline-offset: 0;
 }
 
 /* input {

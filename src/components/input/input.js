@@ -8,9 +8,9 @@ const Input = ({ title, value, inputChange, down }) => {
 
   if(down){
     return (
-    <div class={classes.downWrap}>
+    <div class={classes.Wrap}>
       <p>{title}</p>
-      <input onChange={changeInput} class={classes.input} value={value} />
+      <input onChange={changeInput} class={classes.input} value={value}/>
     </div>
   );
   }
@@ -18,7 +18,7 @@ const Input = ({ title, value, inputChange, down }) => {
     return (
       <div class={classes.wrap}>
         <p>{title}</p>
-        <input onChange={changeInput} class={classes.input} value={value} />
+        <input onChange={changeInput} class={classes.input} value={value}/>
       </div>
     );
   }
