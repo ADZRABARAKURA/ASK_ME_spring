@@ -63,7 +63,6 @@ public class DonationService {
                     this.queueMap.get(url).add(payment.getDonation().toDto());
                 }
                 else{
-                    System.out.println("Я вызван " + queueMap.keySet().size());
                     this.queueMap.put(url, new ArrayDeque<>(){{push(dto);}});
                     this.template.convertAndSend(url, dto);
                 }
@@ -85,12 +84,15 @@ public class DonationService {
                     .build();
 
             var payment = PaymentRequest.builder()
+                    .confirmation(PaymentRequest.Confirmation.builder()
+                            .return_url(STR."https://askme-donation.ru/\{userId}")
+                            .type("redirect")
+                            .build())
                     .amount(PaymentRequest.Amount.builder()
                             .value(donation.getTotal().doubleValue())
                             .currency("RUB")
                             .build())
                     .capture(true)
-                    .confirmation(new PaymentRequest.Confirmation())
                     .description("Заказ на оплату \"Доната\" для стримера " + user.get().getName())
                     .build();
             var createdPayment = yookassaService.createPayment(payment);

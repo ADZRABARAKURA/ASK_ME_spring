@@ -20,9 +20,10 @@ public class PaymentRequest {
 
     @Getter
     @Setter
+    @Builder
     public static class Confirmation{
-        private String type = "redirect";
-        private String return_url = "https://askme-donation.ru";
+        private String type;
+        private String return_url;
     }
 
     private Amount amount;
