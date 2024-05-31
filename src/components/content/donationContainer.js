@@ -30,7 +30,7 @@ const DonationContainer = ({sendDonation, changeMessageInput, changeNameInput, c
                 <div class="streamer-support-text">Поддержать стримера </div>
                 <div class="form-container">
                         <input onChange={changeName} className="nameInput" placeholder="Ваше имя" />
-                        <input onChange={changeTotal} className="totalInput" placeholder="Сумма поддержки" />
+                        <input onChange={changeTotal} className="totalInput" placeholder="Сумма поддержки (в ₽)" />
                         <textarea onChange={changeSymbolsCount} placeholder="Ваше сообщение" rows="4"></textarea>
                         <div id="char-counter" class="char-counter">{symbolsCount}/150</div>
                 </div>

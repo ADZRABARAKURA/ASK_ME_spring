@@ -1,0 +1,116 @@
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Расстояние между изображением и именем */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover; /* Чтобы изображение не искажалось */
+}
+
+.profile-name {
+    background-color: #ffffff6b;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    border: none;
+    width: auto;
+}
+
+.profile-details {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между деталями профиля */
+    padding-bottom: 5%;
+}
+
+
+.profile-detail {
+    width: 100%;
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    background: none;
+}
+
+.fieldName{
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    background: none;
+    margin-right: 5%;
+    margin-left: 2%;
+    width: 15%;
+}
+
+.inputWrapper{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+    width: 70%;
+    background-color: #ffffff90;
+}
+
+.save-button,
+.edit-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-button {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.donationWrapper{
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffffff90;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 20px;
+    width: 70%;
+}
+.donationsWrapper{
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+.donationWrapper .message {
+    margin-left: 4%;
+    margin-right: 4%;
+    word-break: break-all;
+}
+
+.mainInfoWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.donationsSum{
+    color: white;
+    font-size: 1.5em;
+}

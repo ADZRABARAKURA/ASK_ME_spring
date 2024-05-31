@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 const MainPage = () => {
   const { id } = useParams();
-  console.warn(id)
   return (
     <div class={classes.container}>
       <Header /> <ContentBlock userId={id}/>

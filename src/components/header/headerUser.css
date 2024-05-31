@@ -1,0 +1,36 @@
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между элементами */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.header-user__name {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header-user__photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover; /* Для корректного отображения изображения */
+    cursor: pointer;
+}
+
+.header-user__logout {
+    font-size: 2em;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-user__logout:hover {
+    background-color: #45a049;
+}

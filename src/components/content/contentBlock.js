@@ -3,6 +3,8 @@ import axios from 'axios';
 import classes from "./contentBlock.module.css";
 import UserProfile from './userprofile';
 import DonationContainer from './donationContainer';
+import Register from '../../auth/register';
+import Login from '../../auth/login';
 
 const ContentBlock = ({ userId }) => {
   const [userData, setUserData] = useState(null);
