@@ -8,6 +8,7 @@ import tech.razymov.restfull.dto.PaymentResult;
 import tech.razymov.restfull.dto.PaymentUrlDto;
 import tech.razymov.restfull.entity.Donation;
 import tech.razymov.restfull.entity.Payment;
+import tech.razymov.restfull.entity.User;
 import tech.razymov.restfull.exception.UserNotFoundException;
 import tech.razymov.restfull.repository.DonationRepository;
 import tech.razymov.restfull.repository.PaymentRepository;
@@ -15,6 +16,7 @@ import tech.razymov.restfull.repository.UserRepository;
 import tech.razymov.restfull.service.requests.PaymentRequest;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.StringTemplate.STR;
 
@@ -45,6 +47,10 @@ public class DonationService {
                     return queueMap.get(url).peek();
             }
         return null;
+    }
+
+    public List<DonationDto> getUserDonates(User user){
+        return donationRepository.findAllByUser(user).stream().map(DonationDto::new).collect(Collectors.toList());
     }
 
     public void UpdatePayment(PaymentResult paymentResult){

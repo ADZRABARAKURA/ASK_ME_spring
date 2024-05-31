@@ -3,11 +3,16 @@ package tech.razymov.restfull.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
-    USER,
-    ADMIN;
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN");
+
+    private final String authority;
+    Role(String authority) {
+        this.authority = authority;
+    }
 
     @Override
     public String getAuthority() {
-        return null;
+        return authority;
     }
 }

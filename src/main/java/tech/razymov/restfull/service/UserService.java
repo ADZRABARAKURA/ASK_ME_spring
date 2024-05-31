@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tech.razymov.restfull.dto.DonationDto;
 import tech.razymov.restfull.dto.RegisterDto;
 import tech.razymov.restfull.dto.UserDto;
 import tech.razymov.restfull.entity.Role;
@@ -22,6 +23,7 @@ import static tech.razymov.restfull.util.KeyGenerator.generateIdempotenceKey;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final DonationService donationService;
 
     public UserDto update(Long id, UserDto userDto){
         var op = userRepository.findById(id);
@@ -49,6 +51,12 @@ public class UserService {
         if(op.isEmpty())
             throw new UserNotFoundException(id);
         return new UserDto(op.get());
+    }
+
+    public List<DonationDto> userDonates(Long userId){
+        if(userRepository.findById(userId).isPresent())
+            return donationService.getUserDonates(userRepository.findById(userId).get());
+        throw new UserNotFoundException(userId);
     }
 
     public List<UserDto> getAll(){

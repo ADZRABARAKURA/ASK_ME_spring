@@ -18,11 +18,15 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import tech.razymov.restfull.entity.Role;
 import tech.razymov.restfull.service.UserService;
 import tech.razymov.restfull.service.auth.AskMeUserDetailsService;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
@@ -32,6 +36,18 @@ public class SecureConfig{
 
     private final DataSource dataSource;
     private final UserService userService;
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://askme-donation.ru")); // Разрешенные источники
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+        configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
     @Bean
     UserDetailsService userDetailsService(){
         return new AskMeUserDetailsService(userService);
@@ -47,14 +63,16 @@ public class SecureConfig{
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource())).csrf(AbstractHttpConfigurer::disable)
+                //.requiresChannel(c->c.anyRequest().requiresSecure())
                 .authorizeHttpRequests(a->
                     a.requestMatchers(HttpMethod.GET,
                             "/api/users",
-                            "/api/users/*").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
-                            .requestMatchers(HttpMethod.PUT, "/api/users").hasRole("USER")
-                            .requestMatchers(HttpMethod.DELETE, "/api/users/*").hasRole("USER"))
+                            "/api/users/**",
+                                    "/ws/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/api/users/**","/api/donations/**", "/payments/**").permitAll()
+                            .requestMatchers(HttpMethod.PATCH, "/api/users/**").hasAnyAuthority(Role.USER.getAuthority(), Role.ADMIN.getAuthority())
+                            .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasAnyAuthority(Role.USER.getAuthority(), Role.ADMIN.getAuthority()))
                 .formLogin(login -> login
                         .permitAll()
                         .loginPage("/login")

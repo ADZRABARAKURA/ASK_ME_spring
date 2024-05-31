@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class AskMeUserPrincipal implements UserDetails {
-    private User user;
+    private final User user;
 
     @Override
     public String toString(){

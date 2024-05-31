@@ -17,6 +17,8 @@ public class WebSocketConroller {
     private final SimpMessagingTemplate messagingTemplate;
     @MessageMapping("/subscribe")
     public void subscribeToDonations(WebSocetSubscribeId userUrl) {
-        messagingTemplate.convertAndSend(STR."/topic/donations/\{userUrl.getUser_url()}", donationService.getAndDelete(userUrl.getUser_url()));
+        var getAndDelete = donationService.getAndDelete(userUrl.getUser_url());
+        if(getAndDelete!=null)
+            messagingTemplate.convertAndSend(STR."/topic/donations/\{userUrl.getUser_url()}", getAndDelete);
     }
 }

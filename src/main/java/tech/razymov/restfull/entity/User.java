@@ -28,6 +28,7 @@ public class User {
     private String block4;
     private String img;
     private String uniqUrl;
+    @Column(unique = true)
     private String email;
     private String password;
     private Role role;
